@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "depthFirstMaze.h"
+#include "kruskalMaze.h"
 
 #endif

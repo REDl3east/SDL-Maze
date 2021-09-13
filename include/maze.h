@@ -23,7 +23,7 @@ class Maze : public PixelWorld {
   }
 
   virtual void init() = 0;
-	virtual void reset() = 0;
+  virtual void reset() = 0;
   virtual bool iterate() = 0;
 
  protected:
@@ -33,6 +33,10 @@ class Maze : public PixelWorld {
 
   static constexpr uint8_t wall_color[3] = {123, 37, 5};
   static constexpr uint8_t path_color[3] = {196, 119, 89};
+
+  inline Cell* get_cell(int x, int y) {
+    return &maze.get()[x * maze_height + y];
+  }
 
  private:
 };

@@ -14,9 +14,12 @@ set(SOURCES
     src/pixelWorld.cpp
     src/lodepng.cpp
     src/depthFirstMaze.cpp
+    src/huntAndKillMaze.cpp
+    src/kruskalMaze.cpp
 )
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties( ${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
 # Add SDL2 library
 find_package(SDL2 REQUIRED)

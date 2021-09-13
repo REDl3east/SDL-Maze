@@ -1,8 +1,11 @@
 #include "main.h"
 
-static constexpr int INITIAL_WORLD_SCALE = 8;
-static constexpr int INITIAL_WINDOW_WIDTH = 101 * INITIAL_WORLD_SCALE;
-static constexpr int INITIAL_WINDOW_HEIGHT = 101 * INITIAL_WORLD_SCALE;
+#include <thread>
+#include <chrono>
+
+static constexpr int INITIAL_WORLD_SCALE = 100;
+static constexpr int INITIAL_WINDOW_WIDTH = 5 * INITIAL_WORLD_SCALE;
+static constexpr int INITIAL_WINDOW_HEIGHT = 5 * INITIAL_WORLD_SCALE;
 static constexpr int WORLD_WIDTH = INITIAL_WINDOW_WIDTH / INITIAL_WORLD_SCALE;
 static constexpr int WORLD_HEIGHT = INITIAL_WINDOW_HEIGHT / INITIAL_WORLD_SCALE;
 static constexpr const char *APP_NAME = "SDL Maze";
@@ -20,7 +23,7 @@ int main(int argc, char *argv[]) {
 
   std::shared_ptr<SDL_Renderer> renderer(SDL_CreateRenderer(window, -1, 0), [](auto *p) { SDL_DestroyRenderer(p); });
 
-  DepthFirstMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
+  KruskalMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
 
   world.init();
 
@@ -87,6 +90,7 @@ int main(int argc, char *argv[]) {
 
       SDL_RenderPresent(renderer.get());
     }
+
   }
 
   SDL_DestroyWindow(window);
