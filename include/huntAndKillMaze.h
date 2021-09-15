@@ -13,7 +13,7 @@ struct hunt_and_kill_cell {
 
 class HuntAndKillMaze : public Maze<hunt_and_kill_cell> {
  public:
-  HuntAndKillMaze(std::shared_ptr<SDL_Renderer> renderer, int window_width, int window_height, int width, int height, float scale = 1.0) : Maze<hunt_and_kill_cell>(renderer, window_width, window_height, width, height, scale) {}
+  HuntAndKillMaze(std::shared_ptr<SDL_Renderer> renderer, int window_width, int window_height, int width, int height, float scale = 1.0) : Maze(renderer, window_width, window_height, width, height, scale) {}
   void init() override;
   void reset() override;
   bool iterate() override;
