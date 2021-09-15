@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "huntAndKillMaze.h"
+#include "wilsonMaze.h"
 
 #endif
