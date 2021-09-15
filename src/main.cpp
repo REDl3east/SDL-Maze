@@ -23,12 +23,11 @@ int main(int argc, char *argv[]) {
 
   std::shared_ptr<SDL_Renderer> renderer(SDL_CreateRenderer(window, -1, 0), [](auto *p) { SDL_DestroyRenderer(p); });
 
-  WilsonMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
+  ClingyWilsonMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
 
   world.init();
 
   bool done = false;
-
   bool quit = false;
   bool mouse_down = false;
   bool paused = false;
