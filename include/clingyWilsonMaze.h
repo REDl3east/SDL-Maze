@@ -9,6 +9,7 @@ class ClingyWilsonMaze : public WilsonMaze {
 
  private:
   bool do_walking() override;
+	std::optional<wilson_cell*> find_visited_cell(int x, int y);
 };
 
 #endif
