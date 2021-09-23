@@ -89,12 +89,12 @@ std::vector<hunt_and_kill_cell*> HuntAndKillMaze::get_unvisited_neighbors(hunt_a
       push_back_cell(ret, c->x, c->y - 1);
     }
   }
-  if ((c->x + 1 < maze_height)) {
+  if ((c->x + 1 < maze_width)) {
     if (!get_is_visited((c->x + 1), c->y)) {
       push_back_cell(ret, c->x + 1, c->y);
     }
   }
-  if ((c->y + 1 < maze_width)) {
+  if ((c->y + 1 < maze_height)) {
     if (!get_is_visited(c->x, (c->y + 1))) {
       push_back_cell(ret, c->x, c->y + 1);
     }
@@ -126,23 +126,23 @@ hunt_and_kill_cell* HuntAndKillMaze::get_random_neighbor(const std::vector<hunt_
 }
 
 inline void HuntAndKillMaze::push_back_cell(std::vector<hunt_and_kill_cell*>& cells, int x, int y) {
-  cells.push_back(&maze.get()[x * maze_height + y]);
+  cells.push_back(&maze.get()[y * maze_width + x]);
 }
 
 inline void HuntAndKillMaze::set_x(int x, int y, int newx) {
-  maze.get()[x * maze_height + y].x = newx;
+  maze.get()[y * maze_width + x].x = newx;
 }
 
 inline void HuntAndKillMaze::set_y(int x, int y, int newy) {
-  maze.get()[x * maze_height + y].y = newy;
+  maze.get()[y * maze_width + x].y = newy;
 }
 
 inline void HuntAndKillMaze::set_visited(int x, int y, bool v) {
-  maze.get()[x * maze_height + y].visited = v;
+  maze.get()[y * maze_width + x].visited = v;
 }
 
 inline bool HuntAndKillMaze::get_is_visited(int x, int y) {
-  return maze.get()[x * maze_height + y].visited;
+  return maze.get()[y * maze_width + x].visited;
 }
 
 std::optional<hunt_and_kill_cell*> HuntAndKillMaze::hunt() {

@@ -34,6 +34,16 @@ bool WilsonMaze::iterate() {
   return true;
 }
 
+bool WilsonMaze::is_visited(int x, int y) {
+  return maze.get()[y * maze_width + x].visited;
+}
+bool WilsonMaze::is_walked(int x, int y) {
+  return maze.get()[y * maze_width + x].walked;
+}
+void WilsonMaze::push_back_cell(std::vector<wilson_cell*>& cells, int x, int y) {
+  cells.push_back(&maze.get()[y * maze_width + x]);
+}
+
 void WilsonMaze::connect(wilson_cell* c1, wilson_cell* c2) {
   int x_diff = c1->x - c2->x;
   int y_diff = c1->y - c2->y;
@@ -84,12 +94,12 @@ std::vector<wilson_cell*> WilsonMaze::get_neighbors(int x, int y) {
       push_back_cell(ret, x, y - 1);
     }
   }
-  if ((x + 1 < maze_height)) {
+  if ((x + 1 < maze_width)) {
     if (!is_walked(x + 1, y)) {
       push_back_cell(ret, x + 1, y);
     }
   }
-  if ((y + 1 < maze_width)) {
+  if ((y + 1 < maze_height)) {
     if (!is_walked(x, y + 1)) {
       push_back_cell(ret, x, y + 1);
     }
@@ -111,12 +121,12 @@ std::vector<wilson_cell*> WilsonMaze::get_unvisited_neighbors(int x, int y) {
       push_back_cell(ret, x, y - 1);
     }
   }
-  if ((x + 1 < maze_height)) {
+  if ((x + 1 < maze_width)) {
     if (!is_visited((x + 1), y) && !is_walked(x + 1, y)) {
       push_back_cell(ret, x + 1, y);
     }
   }
-  if ((y + 1 < maze_width)) {
+  if ((y + 1 < maze_height)) {
     if (!is_visited(x, (y + 1)) && !is_walked(x, y + 1)) {
       push_back_cell(ret, x, y + 1);
     }
@@ -125,38 +135,26 @@ std::vector<wilson_cell*> WilsonMaze::get_unvisited_neighbors(int x, int y) {
   return ret;
 }
 
-inline void WilsonMaze::push_back_cell(std::vector<wilson_cell*>& cells, int x, int y) {
-  cells.push_back(&maze.get()[x * maze_height + y]);
-}
-
-inline bool WilsonMaze::is_visited(int x, int y) {
-  return maze.get()[x * maze_height + y].visited;
-}
-
-inline bool WilsonMaze::is_walked(int x, int y) {
-  return maze.get()[x * maze_height + y].walked;
-}
-
-inline void WilsonMaze::set_visited(int x, int y, bool v) {
+void WilsonMaze::set_visited(int x, int y, bool v) {
   if (v) {
     auto* cell = get_cell(x, y);
     unvisited_cells.erase(std::remove_if(unvisited_cells.begin(), unvisited_cells.end(), [&cell](auto* x) { return x == cell; }));
   } else {
     unvisited_cells.push_back(get_cell(x, y));
   }
-  maze.get()[x * maze_height + y].visited = v;
+  maze.get()[y * maze_width + x].visited = v;
 }
 
-inline void WilsonMaze::set_walked(int x, int y, bool v) {
-  maze.get()[x * maze_height + y].walked = v;
+void WilsonMaze::set_walked(int x, int y, bool v) {
+  maze.get()[y * maze_width + x].walked = v;
 }
 
-inline void WilsonMaze::set_x(int x, int y, int newx) {
-  maze.get()[x * maze_height + y].x = newx;
+void WilsonMaze::set_x(int x, int y, int newx) {
+  maze.get()[y * maze_width + x].x = newx;
 }
 
-inline void WilsonMaze::set_y(int x, int y, int newy) {
-  maze.get()[x * maze_height + y].y = newy;
+void WilsonMaze::set_y(int x, int y, int newy) {
+  maze.get()[y * maze_width + x].y = newy;
 }
 
 bool WilsonMaze::do_walking() {

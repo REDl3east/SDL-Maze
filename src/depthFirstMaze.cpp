@@ -56,12 +56,12 @@ std::vector<depth_first_cell*> DepthFirstMaze::get_unvisited_neighbors(depth_fir
       push_back_cell(ret, c->x, c->y - 1);
     }
   }
-  if ((c->x + 1 < maze_height)) {
+  if ((c->x + 1 < maze_width)) {
     if (!get_is_visited((c->x + 1), c->y)) {
       push_back_cell(ret, c->x + 1, c->y);
     }
   }
-  if ((c->y + 1 < maze_width)) {
+  if ((c->y + 1 < maze_height)) {
     if (!get_is_visited(c->x, (c->y + 1))) {
       push_back_cell(ret, c->x, c->y + 1);
     }
@@ -93,13 +93,13 @@ depth_first_cell* DepthFirstMaze::get_random_neighbor(const std::vector<depth_fi
 }
 
 depth_first_cell* DepthFirstMaze::push_cell(int x, int y) {
-  auto* cell = &maze.get()[x * maze_height + y];
+  auto* cell = &maze.get()[y * maze_width + x];
   cell_stack.push(cell);
   return cell;
 }
 
 inline void DepthFirstMaze::push_back_cell(std::vector<depth_first_cell*>& cells, int x, int y) {
-  cells.push_back(&maze.get()[x * maze_height + y]);
+  cells.push_back(&maze.get()[y * maze_width + x]);
 }
 
 inline void DepthFirstMaze::push_cell(depth_first_cell* cell) {
@@ -107,17 +107,17 @@ inline void DepthFirstMaze::push_cell(depth_first_cell* cell) {
 }
 
 inline void DepthFirstMaze::set_x(int x, int y, int newx) {
-  maze.get()[x * maze_height + y].x = newx;
+  maze.get()[y * maze_width + x].x = newx;
 }
 
 inline void DepthFirstMaze::set_y(int x, int y, int newy) {
-  maze.get()[x * maze_height + y].y = newy;
+  maze.get()[y * maze_width + x].y = newy;
 }
 
 inline void DepthFirstMaze::set_visited(int x, int y, bool v) {
-  maze.get()[x * maze_height + y].visited = v;
+  maze.get()[y * maze_width + x].visited = v;
 }
 
 inline bool DepthFirstMaze::get_is_visited(int x, int y) {
-  return maze.get()[x * maze_height + y].visited;
+  return maze.get()[y * maze_width + x].visited;
 }

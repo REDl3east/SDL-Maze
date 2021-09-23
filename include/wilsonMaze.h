@@ -17,18 +17,17 @@ class WilsonMaze : public Maze<wilson_cell> {
   void reset() override;
   bool iterate() override;
 
- private:
-  inline bool is_walked(int x, int y);
-  inline void set_visited(int x, int y, bool v);
-  inline void push_back_cell(std::vector<wilson_cell*>& cells, int x, int y);
-
-  inline void set_walked(int x, int y, bool v);
-  inline void set_x(int x, int y, int newx);
-  inline void set_y(int x, int y, int newy);
-
  protected:
+  bool is_visited(int x, int y);
+  bool is_walked(int x, int y);
+  void push_back_cell(std::vector<wilson_cell*>& cells, int x, int y);
+  void set_visited(int x, int y, bool v);
+  void set_walked(int x, int y, bool v);
+  void set_x(int x, int y, int newx);
+  void set_y(int x, int y, int newy);
+
   virtual bool do_walking();
-  inline bool is_visited(int x, int y);
+
   int current_x;
   int current_y;
   bool walking = true;

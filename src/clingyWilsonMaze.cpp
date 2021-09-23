@@ -5,7 +5,7 @@ bool ClingyWilsonMaze::do_walking() {
 
   point((current_x * 2 + 1), (current_y * 2 + 1), walking_color[0], walking_color[1], walking_color[2]);
 
-  auto visited_cell_opt = find_visited_cell(current_x, current_y); //TODO: choose random vistite cell
+  auto visited_cell_opt = find_visited_cell(current_x, current_y);
   if (visited_cell_opt) {
     connect(visited_cell_opt.value(), walked_cells.back());
     walking = false;
@@ -31,12 +31,12 @@ std::optional<wilson_cell*> ClingyWilsonMaze::find_visited_cell(int x, int y) {
       cells.push_back(get_cell(x, y - 1));
     }
   }
-  if ((x + 1 < maze_height)) {
+  if ((x + 1 < maze_width)) {
     if (is_visited((x + 1), y)) {
       cells.push_back(get_cell(x + 1, y));
     }
   }
-  if ((y + 1 < maze_width)) {
+  if ((y + 1 < maze_height)) {
     if (is_visited(x, (y + 1))) {
       cells.push_back(get_cell(x, y + 1));
     }

@@ -19,6 +19,8 @@ class Maze : public PixelWorld {
     maze_width = ((width - 2) / 2) + 1;
     maze_height = ((height - 2) / 2) + 1;
 
+    std::cout << maze_width << ", " << maze_height << '\n';
+
     maze = std::unique_ptr<Cell[]>(new Cell[maze_width * maze_height]);
   }
 
@@ -35,7 +37,7 @@ class Maze : public PixelWorld {
   static constexpr uint8_t path_color[3] = {196, 119, 89};
 
   inline Cell* get_cell(int x, int y) {
-    return &maze.get()[x * maze_height + y];
+    return &maze.get()[y * maze_width + x];
   }
 
  private:

@@ -17,6 +17,7 @@ PixelWorld::PixelWorld(std::shared_ptr<SDL_Renderer> renderer, int window_width,
       m_pixels[j * m_surface->w + i] = (0xFF << 24) | (0xFF << 16) | (0xFF << 8) | 0xFF;
     }
   }
+
   SDL_UpdateTexture(m_texture, NULL, m_surface->pixels, m_surface->w * sizeof(Uint32));
 }
 PixelWorld::~PixelWorld() {
@@ -25,7 +26,7 @@ PixelWorld::~PixelWorld() {
 }
 
 void PixelWorld::point(int x, int y, Uint8 r, Uint8 g, Uint8 b) {
-  m_pixels[x * m_surface->w + y] = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+  m_pixels[y * m_surface->w + x] = (r << 24) | (g << 16) | (b << 8) | 0xFF;
 }
 void PixelWorld::update_position(int xrel, int yrel) {
   m_x += xrel;
