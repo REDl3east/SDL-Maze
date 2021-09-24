@@ -5,5 +5,6 @@
 #include "wilsonMaze.h"
 #include "huntAndKillMaze.h"
 #include "depthFirstMaze.h"
+#include "aldousBroderMaze.h"
 
 #endif

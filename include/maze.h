@@ -19,7 +19,7 @@ class Maze : public PixelWorld {
     maze_width = ((width - 2) / 2) + 1;
     maze_height = ((height - 2) / 2) + 1;
 
-    std::cout << maze_width << ", " << maze_height << '\n';
+    std::cout << width << ", " << height << '\n';
 
     maze = std::unique_ptr<Cell[]>(new Cell[maze_width * maze_height]);
   }
