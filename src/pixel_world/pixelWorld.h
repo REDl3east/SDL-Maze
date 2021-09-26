@@ -23,7 +23,7 @@ class PixelWorld {
   int width() { return m_width; }
 
   bool save(const std::string &filename);
-  bool save_time() {
+  bool save_time(const std::string& directory) {
     time_t rawtime;
     struct tm *timeinfo;
     char buffer[80];
@@ -33,7 +33,7 @@ class PixelWorld {
 
     strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", timeinfo);
     std::string str(buffer);
-    return save(str + ".png");
+    return save(directory + "/" + str + ".png");
   }
 
  protected:
