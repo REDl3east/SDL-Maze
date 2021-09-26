@@ -6,5 +6,6 @@
 #include "huntAndKillMaze.h"
 #include "depthFirstMaze.h"
 #include "aldousBroderMaze.h"
+#include "binaryTreeMaze.h"
 
 #endif

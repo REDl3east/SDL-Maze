@@ -14,7 +14,9 @@ include_directories(
     src/maze/depth_first
     src/maze/hunt_and_kill
     src/maze/wilson
-    src/maze/aldous_broder)
+    src/maze/aldous_broder
+    src/maze/binary_tree
+)
 
 # Add all c source files under the src directory
 set(SOURCES
@@ -27,6 +29,7 @@ set(SOURCES
     src/maze/wilson/clingyWilsonMaze.cpp
     src/maze/aldous_broder/aldousBroderMaze.cpp
 )
+
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties( ${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
@@ -36,8 +39,8 @@ find_package(SDL2 REQUIRED)
 target_link_libraries(${PROJECT_NAME} SDL2::Main)
 
 # Add SDL2_image library
-find_package(SDL2_image REQUIRED)
-target_link_libraries(${PROJECT_NAME} SDL2::Image)
+# find_package(SDL2_image REQUIRED)
+# target_link_libraries(${PROJECT_NAME} SDL2::Image)
 
 # Add SDL2_ttf library
 #find_package(SDL2_ttf REQUIRED)

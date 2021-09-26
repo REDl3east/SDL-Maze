@@ -3,12 +3,12 @@
 #include <chrono>
 #include <thread>
 
-static constexpr int INITIAL_WORLD_SCALE = 6;
-static constexpr int INITIAL_WINDOW_WIDTH = 101 * INITIAL_WORLD_SCALE;
-static constexpr int INITIAL_WINDOW_HEIGHT = 101 * INITIAL_WORLD_SCALE;
-static constexpr int WORLD_WIDTH = INITIAL_WINDOW_WIDTH / INITIAL_WORLD_SCALE;
-static constexpr int WORLD_HEIGHT = INITIAL_WINDOW_HEIGHT / INITIAL_WORLD_SCALE;
-static constexpr const char *APP_NAME = "SDL Maze";
+constexpr int INITIAL_WORLD_SCALE = 1;
+constexpr int INITIAL_WINDOW_WIDTH = 1001 * INITIAL_WORLD_SCALE;
+constexpr int INITIAL_WINDOW_HEIGHT = 1001 * INITIAL_WORLD_SCALE;
+constexpr int WORLD_WIDTH = INITIAL_WINDOW_WIDTH / INITIAL_WORLD_SCALE;
+constexpr int WORLD_HEIGHT = INITIAL_WINDOW_HEIGHT / INITIAL_WORLD_SCALE;
+constexpr const char *APP_NAME = "SDL Maze";
 
 int main(int argc, char **argv) {
   SDL_Event event;
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
   std::shared_ptr<SDL_Renderer> renderer(SDL_CreateRenderer(window, -1, 0), [](auto *p) { SDL_DestroyRenderer(p); });
 
-  AldousBroderMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
+  BinaryTreeMaze world(renderer, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT, INITIAL_WORLD_SCALE);
 
   world.init();
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
         }
         case SDL_KEYDOWN: {
           if (event.key.keysym.sym == SDLK_s) {
-            world.save_time();
+            world.save_time("../../assets");
           }
           if (event.key.keysym.sym == SDLK_p) {
             paused = !paused;
