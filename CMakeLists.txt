@@ -28,6 +28,7 @@ set(SOURCES
     src/maze/wilson/wilsonMaze.cpp
     src/maze/wilson/clingyWilsonMaze.cpp
     src/maze/aldous_broder/aldousBroderMaze.cpp
+    src/maze/binary_tree/binaryTreeMaze.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
